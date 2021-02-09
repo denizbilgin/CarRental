@@ -40,5 +40,6 @@ namespace Business.Concrete
         {
             _colorDal.Update(color);
         }
+
     }
 }
