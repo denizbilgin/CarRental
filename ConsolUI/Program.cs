@@ -10,12 +10,13 @@ namespace ConsolUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new EfCarDal());
-
-            foreach (var car  in carManager.GetCarsDetails())
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            var result = rentalManager.GetRentalsDetails();
+            foreach (var rental in result.Data)
             {
-                Console.WriteLine("{0} / {1} / {2} / {3} / {4}",car.Id,car.BrandName,car.ColorName,car.DailyPrice,car.Description);
+                Console.WriteLine(rental.CarId + " " + rental.FirstName + " " + rental.CompanyName + " " + rental.RentDate + " " + rental.ReturnDate);
             }
+            Console.WriteLine(result.Message);
         }
     }
 }
