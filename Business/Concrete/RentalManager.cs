@@ -21,7 +21,6 @@ namespace Business.Concrete
 
         public IResult Add(Rental entity)
         {
-            //var result = _rentalDal.GetRentalsDetails(r => r.CarId == entity.CarId && r.ReturnDate == null);
             var result = _rentalDal.Get(r => r.CarId == entity.CarId && r.ReturnDate==null);
             if (result != null)
             {
