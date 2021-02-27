@@ -39,17 +39,6 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbyid")]
-        public IActionResult GetById(int id)
-        {
-            var result = _carImageService.GetById(id);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
         [HttpGet("getimagesbycarid")]
         public IActionResult GetImagesByCarId(int id)
         {
@@ -64,6 +53,10 @@ namespace WebAPI.Controllers
         [HttpPost("add")]
         public IActionResult Add([FromForm(Name = ("Image"))] IFormFile file, [FromForm] CarImage carImage)
         {
+            if (file==null)
+            {
+                return BadRequest("Boş resim gönderilemez");
+            }
             var result = _carImageService.Add(carImage, file);
             if (result.Success)
             {
