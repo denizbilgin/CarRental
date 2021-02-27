@@ -42,5 +42,16 @@ namespace Business.Constants
         public static string UsersListed = "Kullanıcılar listelendi.";
         public static string UserDeleted = "Kullanıcı silindi.";
         public static string UserUpdated = "Kullanıcı güncellendi.";
+
+        //About CarImage
+        public static string CarImageAdded = "Araba resmi Eklendi";
+        public static string CarImagesListed = "Araba resimleri listelendi.";
+        public static string CarImageDeleted = "Araba resmi silindi.";
+        public static string CarImageUpdated = "Araba resmi güncellendi.";
+        public static string ImageLimitExceeded = "Bir arabanın maksimum 5 resmi olabilir";
+        public static string[] ValidImageFileTypes = { ".JPG", ".JPEG", ".PNG", ".TIF", ".TIFF", ".GIF", ".BMP", ".ICO" };
+        public static string InvalidImageExtension = "Geçersiz resim uzantısı";
+        public static string CarImageMustBeExists = "Böyle bir resim bulunamamaktadır.";
+        public static string FileCannotDelete = "Dosya silinemez. Silmek istediğiniz dosya bulunamamaktadır.";
     }
 }

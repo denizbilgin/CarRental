@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.ValidationRules;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -23,18 +24,17 @@ namespace Business.Concrete
         [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(Brand brand)
         {
-            if (brand.Names.Length >= 2)
+            IResult result = BusinessRules.Run(CheckIfBrandNameShort(brand.Names));
+            if (result != null)
             {
-                _brandDal.Add(brand);
-                return new SuccessResult(Messages.BrandAdded);
+                return result;
+            }
+            _brandDal.Add(brand);
+            return new SuccessResult(Messages.BrandAdded);
 
-            }
-            else
-            {
-                return new ErrorResult(Messages.BrandNameError);
-            }
         }
 
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
@@ -51,10 +51,20 @@ namespace Business.Concrete
             return new SuccessDataResult<Brand>(_brandDal.Get(b => b.Id == id));
         }
 
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
             return new SuccessResult(Messages.BrandUpdated);
+        }
+
+        private IResult CheckIfBrandNameShort(string brandName)
+        {
+            if (brandName.Length <= 2)
+            {
+                return new ErrorResult(Messages.BrandNameError);
+            }
+            return new SuccessResult();
         }
 
     }

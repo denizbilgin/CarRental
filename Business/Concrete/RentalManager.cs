@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.ValidationRules;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -22,20 +23,20 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(RentalValidator))]
-        public IResult Add(Rental entity)
+        public IResult Add(Rental rental)
         {
-            var result = _rentalDal.Get(r => r.CarId == entity.CarId && r.ReturnDate==null);
+            IResult result = BusinessRules.Run(CheckIfReturnDateNull(rental.CarId));
             if (result != null)
             {
-                return new ErrorResult(Messages.RentalAddError);
+                return result;
             }
-            _rentalDal.Add(entity);
+            _rentalDal.Add(rental);
             return new SuccessResult(Messages.RentalAdded);
         }
 
-        public IResult Delete(Rental entity)
+        public IResult Delete(Rental rental)
         {
-            _rentalDal.Delete(entity);
+            _rentalDal.Delete(rental);
             return new SuccessResult(Messages.RentalDeleted);
         }
 
@@ -54,10 +55,21 @@ namespace Business.Concrete
             return new SuccessDataResult<List<RentalDetailsDto>>(_rentalDal.GetRentalsDetails(),Messages.RentalsListed);
         }
 
-        public IResult Update(Rental entity)
+        public IResult Update(Rental rental)
         {
-            _rentalDal.Update(entity);
+            _rentalDal.Update(rental);
             return new SuccessResult(Messages.RentalUpdated);
+        }
+
+        private IResult CheckIfReturnDateNull(int carId)
+        {
+            //var result = _rentalDal.Get(r => r.CarId == entity.CarId && r.ReturnDate==null);
+            var result = _rentalDal.Get(r => r.Id == carId && r.ReturnDate == null);
+            if (result != null)
+            {
+                return new ErrorResult(Messages.RentalAddError);
+            }
+            return new SuccessResult();
         }
     }
 }

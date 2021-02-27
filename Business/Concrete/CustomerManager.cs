@@ -21,15 +21,16 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(CustomerValidator))]
-        public IResult Add(Customer entity)
+        public IResult Add(Customer customer)
         {
-            _customerDal.Add(entity);
+            _customerDal.Add(customer);
             return new SuccessResult(Messages.CustomerAdded);
         }
 
-        public IResult Delete(Customer entity)
+        [ValidationAspect(typeof(CustomerValidator))]
+        public IResult Delete(Customer customer)
         {
-            _customerDal.Delete(entity);
+            _customerDal.Delete(customer);
             return new SuccessResult(Messages.CustomerDeleted);
         }
 
@@ -44,9 +45,10 @@ namespace Business.Concrete
             return new SuccessDataResult<Customer>(_customerDal.Get(c => c.Id == id));
         }
 
-        public IResult Update(Customer entity)
+        [ValidationAspect(typeof(CustomerValidator))]
+        public IResult Update(Customer customer)
         {
-            _customerDal.Update(entity);
+            _customerDal.Update(customer);
             return new SuccessResult(Messages.CustomerUpdated);
         }
     }
