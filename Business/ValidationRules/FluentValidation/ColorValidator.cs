@@ -10,7 +10,7 @@ namespace Business.ValidationRules
     {
         public ColorValidator()
         {
-            RuleFor(c => c.Names).MinimumLength(3);
+            RuleFor(c => c.Name).MinimumLength(3);
         }
     }
 }

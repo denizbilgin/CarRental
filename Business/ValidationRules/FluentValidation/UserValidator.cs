@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,6 @@ namespace Business.ValidationRules
             RuleFor(u => u.Email).Must(ContainsAt);
             RuleFor(u => u.FirstName).MinimumLength(2);
             RuleFor(u => u.LastName).MinimumLength(2);
-            RuleFor(u => u.Password).MinimumLength(6);
         }
 
         private bool ContainsAt(string arg)

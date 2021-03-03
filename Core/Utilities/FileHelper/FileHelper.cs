@@ -29,7 +29,7 @@ namespace Core.Utilities.FileHelper
 
         public static void Delete(string path)
         {
-                File.Delete(path);
+            File.Delete(path);
         }
 
         public static void Update(IFormFile file, string oldPath)

@@ -24,7 +24,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(Brand brand)
         {
-            IResult result = BusinessRules.Run(CheckIfBrandNameShort(brand.Names));
+            IResult result = BusinessRules.Run(CheckIfBrandNameShort(brand.Name));
             if (result != null)
             {
                 return result;
