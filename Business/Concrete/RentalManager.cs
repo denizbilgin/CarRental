@@ -1,6 +1,9 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
@@ -22,7 +25,9 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
 
+        [SecuredOperation("admin,user")]
         [ValidationAspect(typeof(RentalValidator))]
+        [CacheRemoveAspect("IRentalService.Get")]
         public IResult Add(Rental rental)
         {
             IResult result = BusinessRules.Run(CheckIfReturnDateNull(rental.CarId));
@@ -34,17 +39,23 @@ namespace Business.Concrete
             return new SuccessResult(Messages.RentalAdded);
         }
 
+        [CacheRemoveAspect("IRentalService.Get")]
+        [SecuredOperation("admin,user")]
         public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
             return new SuccessResult(Messages.RentalDeleted);
         }
 
+        [CacheAspect]
+        [PerformanceAspect(3)]
         public IDataResult<List<Rental>> GetAll()
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(),Messages.RentalsListed);
         }
 
+        [CacheAspect]
+        [PerformanceAspect(3)]
         public IDataResult<Rental> GetById(int id)
         {
             return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == id));
@@ -55,6 +66,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<RentalDetailsDto>>(_rentalDal.GetRentalsDetails(),Messages.RentalsListed);
         }
 
+        [ValidationAspect(typeof(RentalValidator))]
+        [CacheRemoveAspect("IRentalService.Get")]
+        [SecuredOperation("admin,user")]
         public IResult Update(Rental rental)
         {
             _rentalDal.Update(rental);
@@ -63,7 +77,6 @@ namespace Business.Concrete
 
         private IResult CheckIfReturnDateNull(int carId)
         {
-            //var result = _rentalDal.Get(r => r.CarId == entity.CarId && r.ReturnDate==null);
             var result = _rentalDal.Get(r => r.Id == carId && r.ReturnDate == null);
             if (result != null)
             {
