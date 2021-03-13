@@ -44,7 +44,7 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
-        [SecuredOperation("admin,user")]
+        //[SecuredOperation("admin,user")]
         [PerformanceAspect(3)]
         public IDataResult<List<Car>> GetAll()
         {
@@ -71,7 +71,7 @@ namespace Business.Concrete
         }
 
         [PerformanceAspect(3)]
-        [SecuredOperation("admin,user")]
+        //[SecuredOperation("admin,user")]
         public IDataResult<List<CarDetailsDto>> GetCarsDetails()
         {
             return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarsDetails());
