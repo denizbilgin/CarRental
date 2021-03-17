@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Utilities.Results;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +9,7 @@ namespace Core.Utilities.FileHelper
 {
     public static class FileHelper
     {
-        public static string Add(IFormFile file)
+        public static IResult Add(IFormFile file)
         {
             string path = Directory.GetCurrentDirectory() + @"\wwwroot\Images";
             var newGuidPath = Guid.NewGuid() + Path.GetExtension(file.FileName);
@@ -24,7 +25,7 @@ namespace Core.Utilities.FileHelper
                 file.CopyTo(stream);
                 stream.Flush();
             }
-            return newPath;
+            return new SuccessResult(newGuidPath);
         }
 
         public static void Delete(string path)

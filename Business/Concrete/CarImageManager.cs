@@ -29,7 +29,6 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("ICarImageService.Get")]
-        [SecuredOperation("admin,user")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(CarImage carImage, IFormFile file)
         {
@@ -38,14 +37,13 @@ namespace Business.Concrete
             {
                 return result;
             }
-            string path = FileHelper.Add(file);
-            carImage.ImagePath = path;
+            var path = FileHelper.Add(file);
+            carImage.ImagePath = path.Message;
             carImage.Date = DateTime.Now;
             _carImageDal.Add(carImage);
             return new SuccessResult(Messages.CarImageAdded);
         }
 
-        [SecuredOperation("admin,user")]
         [CacheRemoveAspect("ICarImageService.Get")]
         public IResult Delete(CarImage carImage)
         {
@@ -54,7 +52,7 @@ namespace Business.Concrete
             if (result != null)
             {
                 return result;
-            }  
+            }
             FileHelper.Delete(path);
             _carImageDal.Delete(carImage);
             return new SuccessResult(Messages.CarImageDeleted);
@@ -75,7 +73,6 @@ namespace Business.Concrete
             return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == id));
         }
 
-        [SecuredOperation("admin,user")]
         [CacheRemoveAspect("ICarImageService.Get")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(CarImage carImage, IFormFile file)
@@ -114,7 +111,7 @@ namespace Business.Concrete
 
         private IDataResult<List<CarImage>> CheckIfCarImageNull(int carId)
         {
-            string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName + @"\WebAPI\wwwroot\Images\default.jpg");
+            string path ="default1.jpg";
             var result = _carImageDal.GetAll(c => c.CarId == carId).Any();
             if (!result)
             {
@@ -151,7 +148,7 @@ namespace Business.Concrete
 
         private IResult CheckIfImageCanDelete(string path)
         {
-            if (File.Exists(path) && Path.GetFileName(path) != "default.jpg")
+            if (File.Exists(path) && Path.GetFileName(path) != @"\WebAPI\wwwroot\Images\default1.jpg")
             {
                 return new SuccessResult();
             }

@@ -24,7 +24,6 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-        [SecuredOperation("admin")]
         [ValidationAspect(typeof(UserValidator))]
         [CacheRemoveAspect("IUserService.Get")]
         public IResult Add(User user)
