@@ -59,6 +59,13 @@ namespace Business.Concrete
             return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == id));
         }
 
+        
+
+        public IDataResult<List<Rental>> GetByCarId(int carId)
+        {
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(r => r.CarId == carId));
+        }
+
         public IDataResult<List<RentalDetailsDto>> GetRentalsDetails()
         {
             return new SuccessDataResult<List<RentalDetailsDto>>(_rentalDal.GetRentalsDetails(),Messages.RentalsListed);
@@ -72,9 +79,9 @@ namespace Business.Concrete
             return new SuccessResult(Messages.RentalUpdated);
         }
 
-        private IResult CheckIfReturnDateNull(int carId)
+        public IResult CheckIfReturnDateNull(int carId)
         {
-            var result = _rentalDal.Get(r => r.Id == carId && r.ReturnDate == null);
+            var result = _rentalDal.Get(r => r.CarId == carId && r.ReturnDate == null);
             if (result != null)
             {
                 return new ErrorResult(Messages.RentalAddError);

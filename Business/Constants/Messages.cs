@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -57,13 +58,16 @@ namespace Business.Constants
         public static string FileCannotDelete = "Dosya silinemez. Silmek istediğiniz dosya bulunamamaktadır.";
 
         //Auth
-        public static string AuthorizationDenied = "Yetkiniz yok";
+        public static string AuthorizationDenied = "Yetkiniz yok.";
 
-        public static string AccessTokenCreated { get; internal set; }
-        public static string UserAlreadyExists { get; internal set; }
-        public static string SuccessfulLogin { get; internal set; }
-        public static User PasswordError { get; internal set; }
-        public static User UserNotFound { get; internal set; }
-        public static string UserRegistered { get; internal set; }
+        public static string AccessTokenCreated = "Token oluşturuldu.";
+        public static string UserAlreadyExists = "Böyle bir kullanıcı zaten var.";
+        public static string SuccessfulLogin = "Sisteme başarıyla giriş yapıldı.";
+        public static string PasswordError = "Şifre hatalı.";
+        public static string UserNotFound = "Böyle bir kullanıcı bulunamadı.";
+        public static string UserRegistered = "Üye olundu.";
+        public static string CarNotFound = "Aradığınız araba bulunamadı";
+
+        public static string SuccessfullyPaid = "Ödeme başarılı!";
     }
 }

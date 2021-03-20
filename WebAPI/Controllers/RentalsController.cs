@@ -42,10 +42,32 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getbycarid")]
+        public IActionResult GetByCarId(int carId)
+        {
+            var result = _rentalService.GetByCarId(carId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpGet("getrentalsdetails")]
         public IActionResult GetRentalsDetails()
         {
             var result = _rentalService.GetRentalsDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("checkifreturndatenull")]
+        public IActionResult CheckIfReturnDateNull(int carId)
+        {
+            var result = _rentalService.CheckIfReturnDateNull(carId);
             if (result.Success)
             {
                 return Ok(result);
