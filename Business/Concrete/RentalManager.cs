@@ -79,7 +79,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.RentalUpdated);
         }
 
-        public IResult CheckIfReturnDateNull(int carId)
+        private IResult CheckIfReturnDateNull(int carId)
         {
             var result = _rentalDal.Get(r => r.CarId == carId && r.ReturnDate == null);
             if (result != null)
