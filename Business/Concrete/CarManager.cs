@@ -97,7 +97,7 @@ namespace Business.Concrete
 
         [CacheRemoveAspect("ICarService.Get")]
         [ValidationAspect(typeof(CarValidator))]
-        [SecuredOperation("admin,user")]
+        //[SecuredOperation("admin,user")]
         public IResult Update(Car car)
         {
             _carDal.Update(car);
