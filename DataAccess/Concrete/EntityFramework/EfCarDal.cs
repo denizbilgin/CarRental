@@ -22,14 +22,14 @@ namespace DataAccess.Concrete.EntityFramework
                              join co in context.Colors on c.ColorId equals co.Id
                              select new CarDetailsDto
                              {
-                                 CarId = c.Id,
+                                 CarId = c.CarId,
                                  BrandName = b.BrandName,
                                  ColorName = co.ColorName,
                                  ModelYear = c.ModelYear,
                                  DailyPrice = c.DailyPrice,
                                  Description = c.Description,
-                                 ImagePath = context.CarImages.Where(x => x.CarId == c.Id).FirstOrDefault().ImagePath,
-                                 Status = !(context.Rentals.Any(r => r.CarId == c.Id && r.ReturnDate == null))
+                                 ImagePath = context.CarImages.Where(x => x.CarId == c.CarId).FirstOrDefault().ImagePath,
+                                 Status = !(context.Rentals.Any(r => r.CarId == c.CarId && r.ReturnDate == null))
                              };
                 return result.ToList();
             }

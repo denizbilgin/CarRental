@@ -18,7 +18,7 @@ namespace DataAccess.Concrete.EntityFramework
             using (CarRentalContext context = new CarRentalContext())
             {
                 var result = from r in filter==null ? context.Rentals : context.Rentals.Where(filter)
-                             join c in context.Cars on r.CarId equals c.Id
+                             join c in context.Cars on r.CarId equals c.CarId
                              join cu in context.Customers on r.CustomerId equals cu.Id
                              join u in context.Users on cu.UserId equals u.Id
                              select new RentalDetailsDto
@@ -27,7 +27,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  FirstName=u.FirstName,
                                  LastName=u.LastName,
                                  CompanyName=cu.CompanyName,
-                                 CarId=c.Id,
+                                 CarId=c.CarId,
                                  RentDate=r.RentDate,
                                  ReturnDate=r.ReturnDate
                              };

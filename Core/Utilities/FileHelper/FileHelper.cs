@@ -9,7 +9,7 @@ namespace Core.Utilities.FileHelper
 {
     public static class FileHelper
     {
-        public static IResult Add(IFormFile file)
+        public static string Add(IFormFile file)
         {
             string path = Directory.GetCurrentDirectory() + @"\wwwroot\Images";
             var newGuidPath = Guid.NewGuid() + Path.GetExtension(file.FileName);
@@ -25,7 +25,7 @@ namespace Core.Utilities.FileHelper
                 file.CopyTo(stream);
                 stream.Flush();
             }
-            return new SuccessResult(newGuidPath);
+            return newGuidPath;
         }
 
         public static void Delete(string path)
@@ -33,14 +33,11 @@ namespace Core.Utilities.FileHelper
             File.Delete(path);
         }
 
-        public static void Update(IFormFile file, string oldPath)
+        public static string Update(IFormFile file, string oldPath)
         {
-            string extension = Path.GetExtension(file.FileName).ToUpper();
-            using (FileStream stream = File.Open(oldPath, FileMode.Open))
-            {
-                file.CopyToAsync(stream);
-                stream.Flush();
-            }
+            Delete(oldPath);
+            return Add(file);
+
         }
     }
 }

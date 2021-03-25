@@ -38,7 +38,7 @@ namespace Business.Concrete
                 return result;
             }
             var path = FileHelper.Add(file);
-            carImage.ImagePath = path.Message;
+            carImage.ImagePath = path;
             carImage.Date = DateTime.Now;
             _carImageDal.Add(carImage);
             return new SuccessResult(Messages.CarImageAdded);
@@ -84,8 +84,8 @@ namespace Business.Concrete
             }
             carImage.Date = DateTime.Now;
             string oldPath = GetById(carImage.Id).Data.ImagePath;
-            FileHelper.Update(file, oldPath);
-            
+            carImage.ImagePath = FileHelper.Update(file, oldPath);
+            _carImageDal.Update(carImage);
             return new SuccessResult(Messages.CarImageUpdated);
         }
 
