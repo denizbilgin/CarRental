@@ -60,7 +60,7 @@ namespace Business.Constants
         //Auth
         public static string AuthorizationDenied = "Yetkiniz yok.";
 
-        public static string AccessTokenCreated = "Token oluşturuldu.";
+        public static string AccessTokenCreated = "Giriş yapıldı.";
         public static string UserAlreadyExists = "Böyle bir kullanıcı zaten var.";
         public static string SuccessfulLogin = "Sisteme başarıyla giriş yapıldı.";
         public static string PasswordError = "Şifre hatalı.";
@@ -69,5 +69,9 @@ namespace Business.Constants
         public static string CarNotFound = "Aradığınız araba bulunamadı";
 
         public static string SuccessfullyPaid = "Ödeme başarılı!";
+
+        public static string ProfileUpdated = "Profil güncellendi.";
+
+        public static string PasswordChanged = "Parola başarıyla değiştirildi.";
     }
 }
