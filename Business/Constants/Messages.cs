@@ -73,5 +73,7 @@ namespace Business.Constants
         public static string ProfileUpdated = "Profil güncellendi.";
 
         public static string PasswordChanged = "Parola başarıyla değiştirildi.";
+
+        public static string CardAdded = "Kart bilgileriniz kaydedildi";
     }
 }
