@@ -75,5 +75,8 @@ namespace Business.Constants
         public static string PasswordChanged = "Parola başarıyla değiştirildi.";
 
         public static string CardAdded = "Kart bilgileriniz kaydedildi";
+
+        public static string PaymentSucceeded = "Ödeme başarılı";
+        public static string PaymentError = "Ödeme başarısız";
     }
 }

@@ -30,5 +30,16 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpPost("checkpayment")]
+        public IActionResult CheckPayment(Payment payment)
+        {
+            var result = _paymentService.CheckPayment(payment);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }

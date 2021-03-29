@@ -9,5 +9,6 @@ namespace Business.Abstract
     public interface IPaymentService
     {
         IResult Add(Payment payment);
+        IResult CheckPayment(Payment payment);
     }
 }
