@@ -1,4 +1,5 @@
-﻿using Core.Entities.Concrete;
+﻿using Business.Concrete;
+using Core.Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
@@ -78,5 +79,7 @@ namespace Business.Constants
 
         public static string PaymentSucceeded = "Ödeme başarılı";
         public static string PaymentError = "Ödeme başarısız";
+
+        public static string EarnedFindex = "200 findex puanı kazandınız!";
     }
 }

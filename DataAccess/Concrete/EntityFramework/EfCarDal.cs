@@ -29,7 +29,8 @@ namespace DataAccess.Concrete.EntityFramework
                                  DailyPrice = c.DailyPrice,
                                  Description = c.Description,
                                  ImagePath = context.CarImages.Where(x => x.CarId == c.CarId).FirstOrDefault().ImagePath,
-                                 Status = !(context.Rentals.Any(r => r.CarId == c.CarId && r.ReturnDate == null))
+                                 MinFindex = c.MinFindex,
+                                 Status = !(context.Rentals.Any(r => r.CarId == c.CarId && (r.ReturnDate == null || r.ReturnDate>DateTime.Now)))
                              };
                 return result.ToList();
             }

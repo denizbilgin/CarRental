@@ -43,16 +43,27 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbyemail")]
-        public IActionResult GetByEmail(string email)
+        [HttpGet("getuserfindexbyuserid")]
+        public IActionResult GetUserFindexByUserId(int id)
         {
-            var result = _userService.GetByMail(email);
+            var result = _userService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+
+        //[HttpGet("getbyemail")]
+        //public IActionResult GetByEmail(string email)
+        //{
+        //    var result = _userService.GetByMail(email);
+        //    if (result.Success)
+        //    {
+        //        return Ok(result);
+        //    }
+        //    return BadRequest(result);
+        //}
 
         [HttpPost("add")]
         public IActionResult Add(User user)
@@ -91,6 +102,17 @@ namespace WebAPI.Controllers
         public IActionResult Delete(User user)
         {
             var result = _userService.Delete(user);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("updateuserfindex")]
+        public IActionResult UpdateUserFindex(int id)
+        {
+            var result = _userService.UpdateUserFindex(id);
             if (result.Success)
             {
                 return Ok(result);

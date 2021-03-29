@@ -63,6 +63,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarsDetails(c => c.CarId == carId));
         }
 
+        public IDataResult<Car> GetCarMinFindex(int carId)
+        {
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == carId));
+        }
+
         //[SecuredOperation("admin,user")]
         public IDataResult<List<CarDetailsDto>> GetCarsByBrandId(int brandId)
         {

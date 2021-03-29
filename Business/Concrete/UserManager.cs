@@ -63,9 +63,9 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UserUpdated);
         }
 
-        public IDataResult<User> GetByMail(string email)
+        public User GetByMail(string email)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+            return _userDal.Get(u => u.Email == email);
         }
 
         public List<OperationClaim> GetClaims(User user)
@@ -81,6 +81,20 @@ namespace Business.Concrete
             userToUpdate.Email = user.Email;
             Update(userToUpdate);
             return new SuccessResult(Messages.ProfileUpdated);
+        }
+
+        public IDataResult<User> GetUserFindexByUserId(int userId)
+        {
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
+        }
+
+        [CacheRemoveAspect("IUserService.Get")]
+        public IResult UpdateUserFindex(int userId)
+        {
+            var userToUpdateFindex = _userDal.Get(u => u.Id == userId);
+            userToUpdateFindex.Findex += 200;
+            _userDal.Update(userToUpdateFindex);
+            return new SuccessResult(Messages.EarnedFindex);
         }
     }
 }
