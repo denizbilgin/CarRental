@@ -16,6 +16,7 @@ namespace Business.ValidationRules
             RuleFor(c => c.Description).NotEmpty();
             RuleFor(c => c.ModelYear).LessThan(DateTime.Now.Year);
             RuleFor(c => c.ModelYear).NotEmpty();
+            RuleFor(c => c.MinFindex).LessThanOrEqualTo(1900);
         }
     }
 }

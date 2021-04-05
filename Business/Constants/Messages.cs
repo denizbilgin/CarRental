@@ -81,5 +81,7 @@ namespace Business.Constants
         public static string PaymentError = "Ödeme başarısız";
 
         public static string EarnedFindex = "200 findex puanı kazandınız!";
+
+        public static string CardDeleted = "Kart silindi.";
     }
 }

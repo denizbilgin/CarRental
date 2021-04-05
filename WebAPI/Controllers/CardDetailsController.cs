@@ -31,6 +31,17 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpPost("delete")]
+        public IActionResult Delete(CardDetail cardDetail)
+        {
+            var cardToDeleteNumber = cardDetail.CardNumber;
+            var result = _cardDetailService.DeleteCard(cardToDeleteNumber);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
 
         [HttpGet("getcardsbyuserid")]
         public IActionResult GetCardsByUserId(int userId)

@@ -73,6 +73,7 @@ namespace Business.Concrete
             return _userDal.GetClaims(user);
         }
 
+        [ValidationAspect(typeof(UserValidator))]
         public IResult UpdateInfo(User user)
         {
             var userToUpdate = GetById(user.Id).Data;

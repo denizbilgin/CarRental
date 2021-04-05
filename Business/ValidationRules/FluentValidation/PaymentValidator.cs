@@ -10,7 +10,7 @@ namespace Business.ValidationRules.FluentValidation
     {
         public PaymentValidator()
         {
-            //RuleFor(p => p.CardNumber).MinimumLength(16);
+            RuleFor(p => p.CardNumber).MinimumLength(16);
         }
     }
 }

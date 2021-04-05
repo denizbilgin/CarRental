@@ -26,10 +26,10 @@ namespace Business.Concrete
 
         [CacheRemoveAspect("ICustomerService.Get")]
         [ValidationAspect(typeof(CustomerValidator))]
-        public IResult Add(Customer customer)
+        public IDataResult<Customer> Add(Customer customer)
         {
             _customerDal.Add(customer);
-            return new SuccessResult(Messages.CustomerAdded);
+            return new SuccessDataResult<Customer>(customer,Messages.CustomerAdded);
         }
 
         [CacheRemoveAspect("ICustomerService.Get")]
