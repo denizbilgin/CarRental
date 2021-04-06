@@ -27,6 +27,7 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(RentalValidator))]
         [CacheRemoveAspect("IRentalService.Get")]
+        [SecuredOperation("admin,user")]
         public IResult Add(Rental rental)
         {
             IResult result = BusinessRules.Run(CheckIfReturnDateNull(rental.CarId));
@@ -39,6 +40,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IRentalService.Get")]
+        [SecuredOperation("admin")]
         public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
@@ -47,6 +49,7 @@ namespace Business.Concrete
 
         [CacheAspect]
         [PerformanceAspect(3)]
+        [SecuredOperation("admin")]
         public IDataResult<List<Rental>> GetAll()
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(),Messages.RentalsListed);
@@ -54,12 +57,11 @@ namespace Business.Concrete
 
         [CacheAspect]
         [PerformanceAspect(3)]
+        [SecuredOperation("admin")]
         public IDataResult<Rental> GetById(int id)
         {
             return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == id));
         }
-
-        
 
         public IDataResult<List<Rental>> GetByCarId(int carId)
         {
@@ -72,6 +74,7 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(RentalValidator))]
         [CacheRemoveAspect("IRentalService.Get")]
+        [SecuredOperation("admin")]
         public IResult Update(Rental rental)
         {
             _rentalDal.Update(rental);

@@ -30,6 +30,7 @@ namespace Business.Concrete
 
         [CacheRemoveAspect("ICarImageService.Get")]
         [ValidationAspect(typeof(CarImageValidator))]
+        [SecuredOperation("user,admin")]
         public IResult Add(CarImage carImage, IFormFile file)
         {
             IResult result = BusinessRules.Run(CheckIfImageLimit(carImage.CarId),CheckIfImageExtensionValid(file));
@@ -45,6 +46,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("ICarImageService.Get")]
+        [SecuredOperation("user,admin")]
         public IResult Delete(CarImage carImage)
         {
             string path = GetById(carImage.Id).Data.ImagePath;
@@ -73,6 +75,7 @@ namespace Business.Concrete
             return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == id));
         }
 
+        [SecuredOperation("user,admin")]
         [CacheRemoveAspect("ICarImageService.Get")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(CarImage carImage, IFormFile file)

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -22,12 +23,14 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(PaymentValidator))]
+        [SecuredOperation("admin,user")]
         public IResult Add(Payment payment)
         {
             _paymentDal.Add(payment);
             return new SuccessResult(Messages.SuccessfullyPaid);
         }
 
+        [SecuredOperation("admin,user")]
         public IResult CheckPayment(Payment payment)
         {
             var paymentToCheck = _paymentDal.GetAll(p => p.CardNumber == payment.CardNumber &&

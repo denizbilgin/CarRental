@@ -42,6 +42,7 @@ namespace Business.Concrete
 
         [CacheAspect]
         [PerformanceAspect(3)]
+        [SecuredOperation("admin")]
         public IDataResult<List<User>> GetAll()
         {
             return new SuccessDataResult<List<User>>(_userDal.GetAll(),Messages.UsersListed);
@@ -49,6 +50,7 @@ namespace Business.Concrete
 
         [CacheAspect]
         [PerformanceAspect(3)]
+        [SecuredOperation("admin,user")]
         public IDataResult<User> GetById(int id)
         {
             return new SuccessDataResult<User>(_userDal.Get(u => u.Id == id));
@@ -56,7 +58,7 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(UserValidator))]
         [CacheRemoveAspect("IUserService.Get")]
-        //[SecuredOperation("admin")]
+        [SecuredOperation("admin,user")]
         public IResult Update(User user)
         {
             _userDal.Update(user);
@@ -74,6 +76,7 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(UserValidator))]
+        [SecuredOperation("admin,user")]
         public IResult UpdateInfo(User user)
         {
             var userToUpdate = GetById(user.Id).Data;
