@@ -4,9 +4,15 @@
 
 Made with C#, .net
 
+![download](https://user-images.githubusercontent.com/77414874/114268118-1a80da00-9a08-11eb-9571-4dff67873445.png)
+
 ## Used
 
 Entity Framework for Databases
+
+Fluent Validation for Validations
+
+Autofac for Dependency Resolve and AOP
 
 ## SOLID Principles Followed
 
