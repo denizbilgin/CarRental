@@ -2,7 +2,7 @@
 
 ## Made With
 
-Made with C#, .net
+Made with C#, .Net
 
 ![download](https://user-images.githubusercontent.com/77414874/114268118-1a80da00-9a08-11eb-9571-4dff67873445.png)
 
